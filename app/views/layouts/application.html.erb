@@ -8,7 +8,50 @@
 </head>
 <body>
 
-<%= yield %>
+<nav class="navbar navbar-inverse" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Rails CMS</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li><%= link_to 'Home', root_path %></li>
+        <% @categoryNav.each do |cat| %>
+          <li><%= link_to cat.name, category_path(cat.id) %></li>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav pull-right">
+        <li><%= link_to 'Upload Photo', upload_path %></li>
+        <li><%= link_to 'Add Category', new_category_path %></li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>
+
+<section>
+  <div class="container">
+    <!-- Alerts & Messages -->
+    <% if flash[:notice] %>
+      <div class="alert alert-success"><%= flash[:notice] %></div>
+    <% end %>
+
+    <% if flash[:alert] %>
+      <div class="alert alert-danger"><%= flash[:alert] %></div>
+    <% end %>
+
+    <%= yield %>
+  </div>
+</section>
+
+<footer>
+  <p>Copyright @copy; 2015, ImageGallery</p>
+</footer>
 
 </body>
 </html>
